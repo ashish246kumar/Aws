@@ -1,0 +1,29 @@
+AWS Elastic Beanstalk me application deployment ke liye alag-alag policies hoti hain, jo batati hain ki naya version kaise deploy hoga. Default setting "All at once" hoti hai, lekin aap ise customize kar sakte hain.
+
+Deployment Policies
+All at Once – Saare instances ek sath update hote hain, par thodi der ke liye downtime ho sakta hai.
+Rolling – Instances ko batches me divide karke update kiya jata hai. Puri capacity available nahi hoti, kyunki kuch instances purane version par rahenge jab tak naye instances update nahi ho jate.
+Rolling with Additional Batch – Ek extra batch launch ki jati hai taaki deployment ke dauraan full capacity maintain ho. Jab deployment complete ho jata hai to extra batch terminate ho jati hai.
+Immutable – Naye instances ek alag Auto Scaling group me launch hote hain. Agar naye instances health check pass nahi karte to unhe hata diya jata hai, aur purane instances as it is rehte hain.
+Traffic Splitting – Canary testing ke liye use hota hai. Pehle sirf kuch traffic naye version par bheja jata hai, aur agar sab thik rahta hai to pura traffic naye version par shift kar diya jata hai. Agar naye instances fail ho jayein, to traffic wapas purane instances par bhej diya jata hai bina service interruption ke.
+Deployment Configuration Options
+Batch Size – Rolling deployments me ek batch me kitne instances update honge. Ye fixed number ya percentage me set kiya ja sakta hai.
+Traffic Split Percentage – Traffic-splitting me kitna traffic naye version par bhejna hai.
+Health Check Ignore Option – Agar application thoda degrade hone ke bawajood sahi chal rahi hai, to aap deployment rollback hone se rok sakte hain.
+Command Timeout – Kitne seconds tak wait kiya jaye jab tak naye instances healthy nahi ho jate.
+Rolling Deployment Working
+Pehle kuch instances ko load balancer se detach kiya jata hai, naya version deploy hota hai, fir wapas attach kiya jata hai.
+Agar health check pass ho jaye to agla batch update hota hai.
+Agar koi batch fail ho jaye, to deployment fail ho jata hai aur purana version active rehta hai.
+Traffic-Splitting Deployment Working
+Ek naye Auto Scaling group me naye instances launch hote hain.
+Shuru me sirf kuch percentage traffic naye instances par bheja jata hai.
+Agar sab thik rahta hai to pura traffic naye version par shift hota hai, aur purane instances terminate ho jate hain.
+Agar naye instances fail ho jayein to traffic wapas purane instances par shift ho jata hai bina downtime ke.
+Rollback kaise hota hai?
+Agar deployment fail ho jaye, to:
+
+Aap console me "Abort current operation" ka use karke rollback kar sakte hain.
+AWS CLI ya API se rollback trigger kar sakte hain.
+*************
+deploying a Flask application to Elastic Beanstalk
