@@ -27,3 +27,98 @@ Aap console me "Abort current operation" ka use karke rollback kar sakte hain.
 AWS CLI ya API se rollback trigger kar sakte hain.
 *************
 deploying a Flask application to Elastic Beanstalk
+******************
+The "127 loopback address" is basically an IP address jo apne computer ya device ke saath baat karne ke liye use hota hai.
+Iska full form hai 127.0.0.1, aur isko "localhost" bhi kehte hain.
+Jab aap 127.0.0.1 type karte ho (jaise browser mein), toh computer samajh jata hai ki " arre, yeh toh mujhe apne aap se connect karna hai
+*********
+Class A
+Range: 0.0.0.0 se 127.255.255.255 tak
+Pehla byte (8 bits): Network ke liye, baaki 24 bits hosts (devices) ke liye.
+Sign: Agar IP ka pehla number 0-127 hai, toh Class A hai.
+2. Class B
+Range: 128.0.0.0 se 191.255.255.255 tak
+Pehle do bytes (16 bits): Network ke liye, baaki 16 bits hosts ke liye.
+Sign: Pehla number 128-191 hai, toh Class B.
+Kaun use karta hai?: Medium size ke networks, jaise universities ya badi companies. Ek Class B network mein 65,000 tak devices aa sakte hain.
+3. Class C
+Range: 192.0.0.0 se 223.255.255.255 tak
+Pehle teen bytes (24 bits): Network ke liye, baaki 8 bits hosts ke liye.
+***
+D
+Range: 224.0.0.0 se 239.255.255.255 tak
+Kaam: Yeh normal networks ke liye nahi hai—isko multicasting ke liye use karte hain. Matlab, ek hi message ko ek group of devices ko bhejna, jaise live streaming ya video calls.
+***********
+Class E
+Range: 240.0.0.0 se 255.255.255.255 tak
+Kaam: Yeh experimental hai—future ke research ya testing ke liye reserved hai. Aam log isko use nahi karte.
+***********
+IPCONFIG
+Full form: Internet Protocol Configuration
+Kya karta hai?: Yeh ek command hai jo Windows computers pe aapke network ki details dikhata hai. Matlab, aapka IP address, subnet mask, gateway, etc. sab pata chal jata hai
+**********
+PING
+Kya karta hai?: Yeh ek tool hai jo check karta hai ki aapka computer kisi doosre device ya server (jaise Google) se connect ho sakta hai ya nahi
+*****
+VPC Create Karte Waqt:
+"Enable DNS Resolution" aur "Enable DNS Hostnames" dono ko ON rakho.
+DNS (Domain Name System) ek tarah ka "phonebook" hai jo domain names (jaise google.com) ko IP addresses (jaise 142.250.190.78) mein convert karta hai.
+VPC mein DNS settings se yeh decide hota hai ki aapka network kaise names resolve karega—internal ya external resources ke liye.
+***************
+Internet Gateway ek tarah ka "darwaza" hai jo aapke Virtual Private Cloud (VPC) ko baahar ki duniya—yaani internet—se connect karta hai. 
+Yeh ek bridge ka kaam karta hai jo VPC ke andar ke resources (jaise servers ya instances) 
+ko internet tak le jata hai aur internet se wapas traffic laata hai.
+**************************************
+1. VPC Created
+2. IGW Attached to VPC
+3. Subnet Created
+4. Route Table Created, Attached to IGW and Subnet
+Destination: 0.0.0.0/0
+Target: igw-xxxx (Internet Gateway ka ID)
+******************************************************************************************************
+Route tables ek "traffic police" ki tarah kaam karte hain VPC ke andar. Yeh decide karte hain ki traffic kahan jana chahiye—VPC ke andar hi rehna hai ya internet pe bhejna hai.
+Inme rules likhe hote hain jo batate hain ki data packets ko efficiently aur securely unki manzil tak kaise pahunchana hai.
+**********
+Route 53 ek DNS (Domain Name System) service hai jo AWS provide karta hai. Yeh domain names (jaise example.com) ko IP addresses mein translate karta hai aur traffic ko sahi jagah route karta hai. 
+Isko set up karne ke liye hum domain register karenge, hosted zone banayenge, aur records configure karenge
+Step 1: AWS Account Banayein (Agar Nahi Hai)
+Step 2: AWS Management Console Mein Route 53 Pe Jao
+Step 3: Domain Register Karo (Ya Existing Domain Use Karo)
+Agar tumhare paas domain nahi hai:
+Route 53 dashboard pe "Domains" -> "Register Domain" pe click karo.
+Apna pasand ka domain name daalo (jaise mywebsite.com) aur check karo available hai ya nahi.
+Available ho toh "Add to cart" karo.
+Contact details bharo (name, address, email, phone).
+"Continue" pe click karo, terms accept karo, aur payment complete karo.
+********************
+Step 4: Hosted Zone Create Karo
+Domain register karne ke baad, Route 53 automatically ek "Hosted Zone" banata hai. Yeh ek container hota hai jisme DNS records store hote hain.
+Check karne ke liye:
+Route 53 dashboard pe "Hosted Zones" pe click karo.
+Tumhara domain (jaise mywebsite.com) wahan dikhega—isko select karo
+**********
+Step 6: DNS Records Banayein
+Ab hosted zone ke andar records banane ka time hai taaki traffic route ho sake.
+Hosted zone select karo aur "Create Record" pe click karo:
+Record Name: Agar apex domain (jaise mywebsite.com) ke liye hai, toh blank chhodo. Subdomain ke liye (jaise www.mywebsite.com), "www" daalo.
+Record Type:
+A (Address) select karo agar IP address pe route karna hai.
+Agar AWS resource (jaise S3 bucket ya EC2) hai, toh A ke saath "Alias" choose karo.
+TTL (Time to Live): Default 300 seconds chhodo (ya adjust karo).
+********
+Value:
+Agar IP hai (jaise 192.168.1.10), toh woh daalo.
+Alias ke liye, "Alias to..." select karo aur resource choose karo (jaise EC2 instance ya S3 bucket).
+"Create Record" pe click karo
+*********************
+Route 53 routing policies se traffic ko smartly manage kar sakte ho:
+Hosted zone mein record select karo ya naya banate waqt "Routing Policy" choose karo.
+Options:
+Simple: Default, ek single resource pe route karta hai.
+Failover: Primary aur secondary resource ke beech switch karta hai agar primary fail ho.
+Latency: User ke location ke hisaab se fastest server pe bhejta hai.
+Weighted: Traffic ko multiple resources mein divide karta hai (jaise 70% ek pe, 30% doosre pe).
+**************
+
+********************
+
