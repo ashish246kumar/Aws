@@ -134,5 +134,12 @@ Ek hi hosted zone mein tum subdomains (jaise blog.example.com, shop.example.com)
 *************************************************************8
 Hosted Zone ek tarah ka DNS record ka collection hota hai jo ek specific domain ke liye traffic manage karta hai. Jab tum ek
 hosted zone create karte ho, toh uske liye charges apply hote hain, chahe tum kitna bhi traffic use karo ya na karo. Ab multiple hosted zones ka matlab hai multiple 
-domains ya subdomains ke liye alag-alag zones, aur har zone ka alag charge lagta hai.
+domains ya subdomains ke liye alag-alag zones, aur hosition	Hosted zone mein ek ya zyada NS records hote hain jo name servers ko point karte hain.	Hosted zone ka ek hi SOA record hota hai, jo zone ka starting point hota hai.ar zone ka alag charge lagta hai.
 ***********************************************************************************
+Aspect	                       NS (Name Server)	                                           SOA (Start of Authority)
+Definition	NS record batata hai ki yeh domain kaunsa name server use karta hai.	SOA record domain ka "authority" info deta hai, jaise admin ka contact aur zone ka metadata.
+Full Form        	Name Server	                                                              Start of Authority
+position	 Hosted zone mein ek ya zyada NS records hote hain jo name servers ko point karte hain. 	Hosted zone ka ek hi SOA record hota hai, jo zone ka starting point hota hai.
+
+***************
+
