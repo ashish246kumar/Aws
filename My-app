@@ -188,5 +188,49 @@ TTL (Time To Live) default (300 seconds) rakho.
 Create record pe click karo.
 15-30 minutes wait karo, phir subdomain ping ya nslookup se check karo.
 *******************************
+ CNAME ek alias hota hai, jo doosre domain name ko point karta hai. Agar aapne root domain par CNAME lagaya, toh woh baaki records (like MX for emails) ko overwrite kar sakta hai.
 
+Toh solution kya hai?
+✅ Option 1: AWS Route 53 ALIAS Record Use Karo
+AWS Route 53 allow karta hai ALIAS record, jo root domain ko directly AWS services (like Load Balancer, CloudFront, S3) se link kar sakta hai.
+Example:
+rust
+Copy
+Edit
+example.com -> ALIAS -> myapp.elb.amazonaws.com
+example.com -> CNAME -> myapp.example.com ❌ (Not allowed for root domain)
+app.example.com -> CNAME -> myapp.example.com ✅ (Allowed)
+***********
+CNAME record ka matlab hota hai “alias”, yani ek domain ko doosre domain ke saath point karna
+
+********
+ALIAS record ek special AWS-specific DNS record hai, jo AWS services ke liye kaam karta hai, jaise:
+CloudFront
+Elastic Load Balancer (ELB)
+API Gateway
+S3 Static Website
+Global Accelerator
+Yeh CNAME jaisa hi hota hai, lekin root domain (apex domain) par bhi kaam karta hai, jo normal CNAME nahi kar sakta.
+*********
+AWS Alias Record Kaise Banayein?
+🛠 Step-by-Step Process:
+1️⃣ AWS Console Open Karo:
+
+AWS Management Console me Route 53 service open karo.
+2️⃣ Hosted Zone Me Jao:
+
+Jis domain ka Alias Record banana hai, uska Hosted Zone open karo.
+3️⃣ New Record Create Karo:
+
+"Create Record" pe click karo.
+4️⃣ Record Type Choose Karo:
+
+Record Name: example.com
+Record Type: A Record (IPv4) ya AAAA Record (IPv6)
+Alias: ✅ Enable karo
+Target: AWS Service select karo (like CloudFront, ELB, S3)
+5️⃣ Save Karo:
+
+Record create karne ke baad Save changes karo.
+***************************************
 
