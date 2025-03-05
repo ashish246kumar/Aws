@@ -121,4 +121,18 @@ Weighted: Traffic ko multiple resources mein divide karta hai (jaise 70% ek pe, 
 **************
 
 ********************
+Hosted Zone ek virtual container ya collection hota hai jo DNS records ko store karta hai. Yeh records batate hain ki koi specific domain name (jaise example.com) 
+ya uske subdomains (jaise www.example.com, blog.example.com) ka traffic kahan route hona chahiye. Simple words mein, 
+yeh ek tarah ka rulebook hai jo internet ko batata hai ki jab koi user domain name type kare,
+toh usko kahan bhejna hai—kisi server pe, kisi website pe, ya kisi aur resource pe
+Hosted Zone ka naam usually wahi hota hai jo domain ka naam hota hai. Jaise agar domain hai example.com, toh hosted zone bhi example.com
+Website Hosting:
+Tumhari website ka traffic manage karne ke liye, jaise example.com ko specific server pe point karna.
+Subdomains Management:
+Ek hi hosted zone mein tum subdomains (jaise blog.example.com, shop.example.com) ke liye alag-alag rules bana sakte ho
 
+*************************************************************8
+Hosted Zone ek tarah ka DNS record ka collection hota hai jo ek specific domain ke liye traffic manage karta hai. Jab tum ek
+hosted zone create karte ho, toh uske liye charges apply hote hain, chahe tum kitna bhi traffic use karo ya na karo. Ab multiple hosted zones ka matlab hai multiple 
+domains ya subdomains ke liye alag-alag zones, aur har zone ka alag charge lagta hai.
+***********************************************************************************
