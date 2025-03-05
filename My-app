@@ -230,7 +230,11 @@ Record Type: A Record (IPv4) ya AAAA Record (IPv6)
 Alias: ✅ Enable karo
 Target: AWS Service select karo (like CloudFront, ELB, S3)
 5️⃣ Save Karo:
+************
 
+**********
 Record create karne ke baad Save changes karo.
 ***************************************
-
+health check in route 53
+parent health check
+routing policy ib route53
