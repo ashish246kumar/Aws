@@ -142,4 +142,51 @@ Full Form        	              Name Server	                                    
 position	 Hosted zone mein ek ya zyada NS records hote hain jo name servers ko point karte hain. 	Hosted zone ka ek hi SOA record hota hai, jo zone ka starting point hota hai.
 Structure	Bas name server ka hostname deta hai (jaise ns-123.awsdns-45.com).	Multiple fields hote hain (jaise primary name server, admin email, serial number, etc.).
 ***************
+Step 1: DNS Record Types Explained in HinEnglish
+A Record: Ye "Address" record hota hai. Isse aap apne domain (like example.com) ko ek IPv4 address se connect karte ho. For example, agar aapka website ka server 192.0.2.1 pe hai, to A record bolega ki example.com -> 192.0.2.1.
+AAAA Record: Ye bhi A jaisa hi hai, but ye IPv6 address ke liye hota hai (jo newer version hai IP ka). For example, 2001:db8::1.
+CNAME Record: Ye "Canonical Name" hota hai. Isse aap ek domain ko dusre domain se link karte ho. Jaise agar aapke paas ek S3 bucket ya load balancer hai (e.g., mybucket.s3.amazonaws.com), to aap apna domain (like files.example.com) usse point kar sakte ho using CNAME.
+**********
+Type: CNAME
+Name: files.example.com
+Value: mybucket.s3.amazonaws.com (ya load balancer ka URL)
+TTL: 300
+**********
+What is a Subdomain? (Subdomain Kya Hai?)
+Pehle yeh samajh le ki subdomain kya hota hai. Agar teri main website hai, jaise example.com, toh ek subdomain uska ek chhota part hota hai jo alag se kaam karta hai, 
+jaise blog.example.com ya shop.example.com.
+**************
+SSL Certificate: Agar tera main domain pe SSL (https) hai, toh subdomain pe bhi automatically apply ho sakta hai. Warna manually add karna padega.
+**********
+Agar aapko AWS mein ek subdomain create karna hai, toh aapko Route 53 ka use karna padega. Yahaan step-by-step process diya hai:
+Step 1: Main Domain Check Karo
+Step 2: Route 53 Mein Hosted Zone Open Karo
+AWS console open karo.
+Route 53 service par jao.
+Hosted zones par click karo.
+Apne domain ka hosted zone select karo.
+Step 3: Subdomain Ke Liye New Record Banayein
+Create record button pe click karo.
+Record name field mein apna subdomain likho. Example:
+Agar aapko app.example.com banana hai, toh Record name: app likho.
+Step 3: Subdomain Ke Liye New Record Banayein
+Create record button pe click karo.
+Record name field mein apna subdomain likho. Example:
+Agar aapko app.example.com banana hai, toh Record name: app likho.
+Record type:
+Agar subdomain kisi server/EC2 instance ko point kar raha hai, toh A record select karo.
+Agar subdomain kisi another domain ya Load Balancer ko point kar raha hai, toh CNAME record select karo.
+Step 4: Subdomain Ka Destination Set Karo
+A Record ke liye:
+Value mein EC2 ka public IP daalo.
+Agar aapne Elastic IP assign kiya hai, toh wahi daalo.
+CNAME Record ke liye:
+Agar aap subdomain ko kisi Load Balancer ya existing domain pe point karna chahte ho, toh uska DNS name likho.
+Example: myapp.elb.amazonaws.com
+Step 5: Record Save Karo
+TTL (Time To Live) default (300 seconds) rakho.
+Create record pe click karo.
+15-30 minutes wait karo, phir subdomain ping ya nslookup se check karo.
+*******************************
+
 
