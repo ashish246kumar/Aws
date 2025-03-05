@@ -138,8 +138,8 @@ domains ya subdomains ke liye alag-alag zones, aur hosition	Hosted zone mein ek 
 ***********************************************************************************
 Aspect	                       NS (Name Server)	                                           SOA (Start of Authority)
 Definition	NS record batata hai ki yeh domain kaunsa name server use karta hai.	SOA record domain ka "authority" info deta hai, jaise admin ka contact aur zone ka metadata.
-Full Form        	Name Server	                                                              Start of Authority
+Full Form        	              Name Server	                                                              Start of Authority
 position	 Hosted zone mein ek ya zyada NS records hote hain jo name servers ko point karte hain. 	Hosted zone ka ek hi SOA record hota hai, jo zone ka starting point hota hai.
-
+Structure	Bas name server ka hostname deta hai (jaise ns-123.awsdns-45.com).	Multiple fields hote hain (jaise primary name server, admin email, serial number, etc.).
 ***************
 
