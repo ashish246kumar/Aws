@@ -27,3 +27,8 @@ Cache Settings Soch Samajh Ke Karo: Static content (jaise images, CSS) ke liye c
 Health Checks Set Karo: ALB pe health checks set karo taaki sirf healthy EC2 instances ko traffic mile.
 Logging Enable Karo: CloudFront aur ALB dono pe logging enable karo taaki traffic aur errors track kar sako.
 Cost Ka Dhyan Rakho: CloudFront aur ALB dono ke charges hote hai, to usage monitor karo.
+********************
+Maan lo aapki website pe static content (images, CSS) aur dynamic content (user profile API) dono hai:
+
+User jab website kholta hai, CloudFront images aur CSS ko cache se serve karta hai (fast delivery).
+Jab user profile API call karta hai, CloudFront request ko ALB pe bhejta hai, ALB usse sahi EC2 instance pe route karta hai, aur response wapas user tak jata hai. Isse speed bhi badh jati hai aur server load bhi kam hota hai.
