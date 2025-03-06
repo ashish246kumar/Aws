@@ -1,0 +1,6 @@
+CloudFront
+Ye Amazon ka Content Delivery Network (CDN) hai.
+Isse aapki website ya app ke content (jaise images, videos, HTML pages) ko globally distribute kar sakte ho.
+CloudFront ke edge locations (servers) hote hai jo users ke paas hote hai, to content fast load hota hai.
+Example: Agar user India mein hai aur aapka server US mein hai, CloudFront India ke edge location se content deliver karega, to speed badh jati hai.
+********
