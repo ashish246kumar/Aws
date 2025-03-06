@@ -4,3 +4,20 @@ Isse aapki website ya app ke content (jaise images, videos, HTML pages) ko globa
 CloudFront ke edge locations (servers) hote hai jo users ke paas hote hai, to content fast load hota hai.
 Example: Agar user India mein hai aur aapka server US mein hai, CloudFront India ke edge location se content deliver karega, to speed badh jati hai.
 ********
+Why Use CloudFront with ALB Together? (Dono Ko Sath Mein Kyu Use Karte Hai?)
+Dono ko sath mein use karne ke bohot fayde hai:
+
+Speed Badh Jati Hai: CloudFront content ko cache karke users ke paas ke edge locations se serve karta hai, to latency kam hoti hai.
+Load Kam Hota Hai: Jab CloudFront cached content serve karta hai, to direct ALB aur servers pe load kam aata hai.
+Security Badhati Hai: CloudFront ke sath AWS WAF (Web Application Firewall) use kar sakte ho for DDoS protection. ALB bhi security features deta hai.
+Smart Routing + Global Reach: ALB smartly routes traffic to backend servers, aur CloudFront global delivery ke liye optimize karta hai.
+Cost Saving: Cached content ke wajah se origin (ALB/servers) pe requests kam jate hai, to bandwidth cost kam hota hai.
+*********************************
+User request karta hai (jaise www.example.com pe jata hai).
+Request CloudFront ke edge location pe jati hai.
+Agar content cached hai (jaise image ya static page), CloudFront seedha user ko serve kar deta hai.
+Agar content cached nahi hai ya dynamic hai (jaise user-specific data), CloudFront request ko ALB pe forward karta hai.
+ALB request ko dekhta hai aur usse sahi backend server (jaise EC2 instance) pe bhej deta hai.
+Backend server response deta hai, jo ALB ke through CloudFront tak jata hai.
+CloudFront response ko cache kar sakta hai (agar cacheable hai) aur user ko bhej deta hai.
+********
