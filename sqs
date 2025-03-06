@@ -1,0 +1,49 @@
+Ye applications ke beech messages (data) ko send, store, aur receive karne ke liye use hota hai. Isse aapke system ke different parts (components) ek dusre se baat kar sakte hai without directly connecting.
+
+Why Use Amazon SQS? (SQS Kyu Use Karte Hai?)
+SQS ka use distributed systems mein bohot hota hai. Iske kuch main fayde hai:
+
+Decoupling: Applications ko direct connect karne ki zarurat nahi. Ek app message queue mein daal deti hai, dusra app baad mein padh leta hai.
+
+Scalability: Agar bohot saare messages aa rahe hai, SQS handle kar sakta hai aur aapke apps ko scale karne mein madad karta hai.
+Asynchronous Processing: Ek app ko dusre app ka wait nahi karna padta. Message daal do aur agla kaam karo.
+
+Types of SQS Queues (SQS Ke Types)
+SQS ke do main types hote hai:
+
+Standard Queue:
+High throughput (bohot saare messages handle kar sakta hai).
+Messages delivery "at-least-once" guarantee deta hai (matlab ek message ek se zyada baar bhi aa sakta hai).
+Order guarantee nahi deta (messages ka sequence change ho sakta hai).
+Example: General purpose ke liye use karo jab order matter nahi karta.
+FIFO Queue (First-In-First-Out):
+Messages ka strict order maintain karta hai (jo pehle aaya, wo pehle jayega).
+"Exactly-once" delivery guarantee (duplicate messages nahi aate).
+Thoda slow hota hai Standard ke comparison mein.
+**********************
+Consumer Message Padhta Hai:
+Dusra application (Consumer) queue se message ko retrieve karta hai.
+Jab consumer message padhta hai, SQS message ko temporarily "invisible" kar deta hai (visibility timeout ke liye) taaki koi aur usse na padh le.
+Visibility timeout: Ek time period jisme message invisible rehta hai (default 30 seconds, adjustable).
+*******
+Message Queue Mein Store Hota Hai:
+SQS message ko apne queue mein store karta hai.
+Message tab tak queue mein rehta hai jab tak koi consumer usse process na kare ya message ka retention period (default 4 days, max 14 days) khatam na ho jaye.
+*******
+Message Process aur Delete:
+Consumer message process karta hai (jaise order ko database mein save karta hai).
+Process hone ke baad, consumer SQS ko bolta hai message delete karne ke liye.
+****************
+Key Concepts of SQS (Important Baatein)
+Message Retention Period:
+Messages queue mein kitne time tak rahenge, ye set kar sakte ho (1 minute se 14 days tak).
+Default: 4 days.
+********
+Visibility Timeout:
+Jab ek consumer message padhta hai, to wo message kitne time tak dusre consumers ke liye invisible rahega.
+Default: 30 seconds (adjustable).
+Long Polling vs Short Polling:
+Short Polling: Consumer queue se turant check karta hai, agar message nahi hai to empty response deta hai.
+Long Polling: Consumer thodi der wait karta hai (max 20 seconds) taaki message aaye, isse API calls kam hote hai aur cost bachta hai
+**************************
+Agar consumer fail ho jata hai aur delete nahi karta, to visibility timeout khatam hone ke baad message wapas queue mein visible ho jata hai.
