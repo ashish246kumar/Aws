@@ -1,0 +1,33 @@
+CloudWatch ek monitoring tool hai jo Amazon Web Services (AWS) provide karta hai. Yeh basically ek watchman ki tarah kaam karta hai jo tere cloud resources (jaise servers, databases, apps) pe nazar rakhta hai. 
+Yeh data collect karta hai, metrics deta hai, aur alarms set kar sakta hai jab kuch galat ho.
+How kaam karta hai?: Yeh metrics (jaise CPU, memory, network) collect karta hai aur dashboard pe dikhata hai. Agar kuch threshold cross hota hai (like CPU 50% se zyada), toh alarm trigger kar sakta hai
+Why important hai?: Taaki tujhe pata chale system overload ho raha hai ya nahi, aur crash hone se pehle action le sake.
+*****************
+When Action Lena Chahiye?
+
+Jab yeh metrics 50% se above consistently rehte hai, aur trend upar ja raha hai.
+CloudWatch alarms set karo – jaise “if CPU > 70% for 15 mins, then notify”.
+Auto-scaling setup karo – agar load badhta hai, toh automatically zyada servers add ho jaye.\
+************
+Network 50% se above: Agar bandwidth max out ho raha hai, toh data transfer slow hoga, aur users ko wait karna padega.
+**********
+Namespace ek logical grouping hai CloudWatch mein jo metrics ko organize karta hai. Think of it like ek folder jisme related metrics store hote hai.
+
+What?: Namespace ek category hota hai jo metrics ko define karta hai. For example, AWS ke services ke liye predefined namespaces hote hai jaise AWS/EC2 (for EC2 instances), AWS/S3 (for S3 buckets). 
+Tu apna custom namespace bhi bana sakta hai.
+
+**************************************************
+****************
+When?: Jab tu custom metrics banata hai ya AWS ke default metrics use karta hai. For example, agar tu apni app ke liye custom metrics (jaise “number of users logged in”) track karna chahta hai, toh ek custom namespace banayega jaise MyApp/Metrics.
+*****
+Custom Dashboard Kya Hai?
+Custom Dashboard ek visual interface hai CloudWatch mein jisme tu apne metrics ko graphs, charts ya tables ke form mein dekh sakta hai
+***********
+When (Kab Kaam Karta Hai?)
+CloudWatch Alarm tab trigger hota hai jab aapne jo condition set ki hai, wo meet hoti hai. For example:
+
+Jab Metrics Threshold Cross Hota Hai: Agar aapne bola hai ki CPU usage agar 80% se zyada ho 5 minutes tak, to alarm trigger hoga.
+Jab Data Missing Hota Hai: Agar data nahi aata (missing data) aur aapne uske liye rule banaya hai, to bhi alarm trigger ho sakta hai.
+Jab State Change Hota Hai: Alarm ke teen states hote hai: OK, ALARM, aur INSUFFICIENT_DATA. Jab state change hota hai (like OK se ALARM), tab action hota hai.
+**************************************
+
