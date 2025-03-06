@@ -47,3 +47,7 @@ Short Polling: Consumer queue se turant check karta hai, agar message nahi hai t
 Long Polling: Consumer thodi der wait karta hai (max 20 seconds) taaki message aaye, isse API calls kam hote hai aur cost bachta hai
 **************************
 Agar consumer fail ho jata hai aur delete nahi karta, to visibility timeout khatam hone ke baad message wapas queue mein visible ho jata hai.
+*************
+What is Backpressure? (Ye Kya Hai?)
+Backpressure ek situation hai jab ek system ya component itna zyada data ya requests receive kar raha hai ki wo handle nahi kar paa raha. Isse system slow ho sakta hai, crash ho sakta hai, ya performance kharab ho sakta hai.
+***********
