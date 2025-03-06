@@ -7,7 +7,7 @@ When Action Lena Chahiye?
 
 Jab yeh metrics 50% se above consistently rehte hai, aur trend upar ja raha hai.
 CloudWatch alarms set karo – jaise “if CPU > 70% for 15 mins, then notify”.
-Auto-scaling setup karo – agar load badhta hai, toh automatically zyada servers add ho jaye.\
+Auto-scaling setup karo – agar load badhta hai, toh automatically zyada servers add ho jaye.
 ************
 Network 50% se above: Agar bandwidth max out ho raha hai, toh data transfer slow hoga, aur users ko wait karna padega.
 **********
